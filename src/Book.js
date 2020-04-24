@@ -51,12 +51,14 @@ export default class Book extends Component {
   }
 
   componentDidMount() {
-    const { id, title, imageUrl } = this.props;
+    const { id, title , shelf, imageLinks} = this.props.book;
+    const imageUrl = imageLinks.thumbnail
 
     this.setState({
       id,
       title,
-      imageUrl
+      imageUrl,
+      shelf
     });
   }
 
@@ -68,7 +70,7 @@ export default class Book extends Component {
     }
     BooksAPI.update(book, shelf)
     .then(() => {
-      this.props.fetchList();
+      this.props.transferBook(this.state, shelf);
     })
     
   }

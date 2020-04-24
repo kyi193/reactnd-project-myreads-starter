@@ -63,11 +63,9 @@ export default class Home extends Component {
                     {this.state.shelves.currentlyReading
                       .map(book => (
                         <Book
-                          key={book.id}
-                          id={book.id}
-                          title={book.title}
-                          imageUrl={book.imageLinks.thumbnail}
-                          fetchList={this.fetchList.bind(this)}
+                            key={book.id}
+                            book={book}
+                            transferBook={this.transferBook}
                         />
                       ))}
                   </div>
@@ -87,10 +85,8 @@ export default class Home extends Component {
                       .map(book => (
                         <Book
                           key={book.id}
-                          id={book.id}
-                          title={book.title}
-                          imageUrl={book.imageLinks.thumbnail}
-                          fetchList={this.fetchList.bind(this)}
+                          book={book}
+                          transferBook={this.transferBook}
                         />
                       ))}
                   </div>
@@ -110,10 +106,8 @@ export default class Home extends Component {
                       .map(book => (
                         <Book
                           key={book.id}
-                          id={book.id}
-                          title={book.title}
-                          imageUrl={book.imageLinks.thumbnail}
-                          fetchList={this.fetchList.bind(this)}
+                          book={book}
+                          transferBook={this.transferBook}
                         />
                       ))}
                   </div>
