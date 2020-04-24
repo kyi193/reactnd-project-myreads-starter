@@ -70,7 +70,7 @@ export default class Book extends Component {
     }
     BooksAPI.update(book, shelf)
     .then(() => {
-      this.props.transferBook(this.state, shelf);
+      this.props.transferBook(this.props.book, shelf);
     })
     
   }

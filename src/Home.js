@@ -16,11 +16,30 @@ export default class Home extends Component {
     }
 
     this.fetchList = this.fetchList.bind(this)
+    this.transferBook = this.transferBook.bind(this)
   }
 
   componentDidMount() {
     this.fetchList();
   }
+
+  transferBook(book, toShelfName) {
+    const fromShelfName = book.shelf;
+    const fromShelf = this.state.shelves[fromShelfName];
+    const toShelf = this.state.shelves[toShelfName];
+    const filteredFromShelf = fromShelf.filter(filteredBook => filteredBook.title !== book.title)
+    const unusedShelfName = Object.keys(this.state.shelves)
+      .filter(filteredShelf => ![fromShelfName, toShelfName].includes(filteredShelf)).toString();
+    const unusedShelf = this.state.shelves[unusedShelfName];
+    this.setState({
+      shelves:{
+        [fromShelfName]: filteredFromShelf,
+        [toShelfName]: [...toShelf, book],
+        [unusedShelfName]: unusedShelf,
+      }
+    })
+  }
+
 
   fetchList() {
     const [currentlyReading, wantToRead, read] = [[], [], []];
