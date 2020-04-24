@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import * as BooksAPI from './BooksAPI'
+
 
 import styled from "styled-components";
 
 import spinner from "./spinner.gif"
 
 const shelves = [
-  { id: 1, shelf: "Currently Reading" },
-  { id: 2, shelf: "Want to Read" },
-  { id: 3, shelf: "Read" },
-  { id: 4, shelf: "None" }
+  { id: 1, shelf: "None" },
+  { id: 2, shelf: "Currently Reading" },
+  { id: 3, shelf: "Want to Read" },
+  { id: 4, shelf: "Read" }
 ];
 
 
@@ -33,36 +35,53 @@ const Card = styled.div`
 
 
 export default class Book extends Component {
-  state = {
-    key: '',
-    title: '',
-    imageUrl: '',
-    imageLoading: true,
-    tooManyRequests: false,
-  };
+  constructor(props) {
+    super(props)
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.shelf !== this.state.shelf) {
-      if (this.state.shelf === "" || this.state.shelf === undefined) {
-        return;
-      }
+    this.state = {
+      id: '',
+      title: '',
+      imageUrl: '',
+      imageLoading: true,
+      tooManyRequests: false,
     }
+
+    this.updateList = this.updateList.bind(this);
+    this.handleShelfSelect = this.handleShelfSelect.bind(this);
   }
+
   componentDidMount() {
-    const { key, title, imageUrl } = this.props;
+    const { id, title, imageUrl } = this.props;
 
     this.setState({
-      key,
+      id,
       title,
       imageUrl
     });
   }
 
+  updateList = shelf => {
+    const book = {
+      id: this.state.id,
+      title: this.state.title,
+      imageUrl: this.state.imageUrl,
+    }
+    BooksAPI.update(book, shelf)
+    
+  }
+
   handleShelfSelect = e => {
     if (e.target.value !== "None") {
       e.persist();
-      const genre = e.target.value;
-      this.setState({ shelf: genre });
+      if (e.target.value === "Currently Reading") {
+        this.updateList("currentlyReading")
+      }
+      else if (e.target.value === "Want to Read") {
+        this.updateList("wantToRead")
+      }
+      else if (e.target.value === "Read") {
+        this.updateList("read")
+      }
     }
   };
 
@@ -76,7 +95,8 @@ export default class Book extends Component {
             className="card-img-top rounded mx-auto d-block mt-2"
           />
           <div className="book-shelf-changer">
-              <select id="genres" className="dropdown" onChange={this.handleShelfSelect}>
+            <select id="genres" className="dropdown" onChange={this.handleShelfSelect}>
+              <option disabled>Select an Option...</option>
               {shelves.map(item => (
                 <option key={item.id} className="dropdown__option" value={item.shelf}>
                   {item.shelf}

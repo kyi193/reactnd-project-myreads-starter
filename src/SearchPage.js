@@ -30,6 +30,7 @@ export default class SearchPage extends Component {
     }
   }
 
+
   updateSearch(event) {
     let term = event.target.value.toLowerCase();
     this.setState({
@@ -75,7 +76,7 @@ export default class SearchPage extends Component {
           <div className="row">
             {this.state.bookList.map(book => (
               <Book
-                key={book.industryIdentifiers[0].identifier}
+                id={book.id}
                 title={book.title}
                 imageUrl={book.imageLinks.thumbnail}
               />

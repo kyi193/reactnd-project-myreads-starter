@@ -4,62 +4,136 @@ import Book from "./Book"
 
 
 export default class Home extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      shelves: {
+        currentlyReading: [],
+        wantToRead: [],
+        read: [],
+      },
+    }
+
+    this.fetchList = this.fetchList.bind(this)
+  }
+
+  componentDidMount() {
+    this.fetchList();
+  }
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   console.log("Homepage Updated")
+  //   if (prevState.bookList.length !== 0) {
+  //     console.log("boop")
+  //     if (prevState.bookList[0].id !== this.state.bookList[0].id) {
+  //       this.fetchList();
+  //     }
+  //   }
+  // }
+
+  fetchList() {
+    const [ currentlyReading, wantToRead, read ] = [[],[],[]];
+    BooksAPI.getAll()
+      .then(books => {
+        for (let i = 0; i < books.length; i++) {
+          if (books[i].shelf === "currentlyReading") {
+            currentlyReading.push(books[i]);
+          } else if (books[i].shelf === "wantToRead") {
+            wantToRead.push(books[i]);
+          } else if (books[i].shelf === "read") {
+            read.push(books[i]);
+          }
+        }
+        this.setState({
+          shelves: {
+            currentlyReading,
+            wantToRead,
+            read
+          }
+        })
+      })
+      
+  }
+
+
   render() {
     return (
       <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">
-              <div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Currently Reading</h2>
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
-                      
-                    </ol>
+        <div className="list-books-title">
+          <h1>MyReads</h1>
+        </div>
+        <div className="list-books-content">
+          <div>
+            <div className="bookshelf">
+              <h2 className="bookshelf-title">Currently Reading</h2>
+              <div className="bookshelf-books">
+                {this.state.shelves.currentlyReading ? (
+                  <div className="row">
+                    {this.state.shelves.currentlyReading
+                      .map(book => (
+                        <Book
+                          id={book.id}
+                          title={book.title}
+                          imageUrl={book.imageLinks.thumbnail}
+                        />
+                      ))}
                   </div>
-                </div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Want to Read</h2>
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
-                      
-                    </ol>
-                  </div>
-                </div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Read</h2>
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
-                      
-                      {/* <li>
-                        <div className="book">
-                          <div className="book-top">
-                            <div className="book-cover" style={{ width: 128, height: 192, backgroundImage: 'url("http://books.google.com/books/content?id=32haAAAAMAAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE72yckZ5f5bDFVIf7BGPbjA0KYYtlQ__nWB-hI_YZmZ-fScYwFy4O_fWOcPwf-pgv3pPQNJP_sT5J_xOUciD8WaKmevh1rUR-1jk7g1aCD_KeJaOpjVu0cm_11BBIUXdxbFkVMdi&source=gbs_api")' }}></div>
-                            <div className="book-shelf-changer">
-                              <select>
-                                <option value="move" disabled>Move to...</option>
-                                <option value="currentlyReading">Currently Reading</option>
-                                <option value="wantToRead">Want to Read</option>
-                                <option value="read">Read</option>
-                                <option value="none">None</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div className="book-title">The Adventures of Tom Sawyer</div>
-                          <div className="book-authors">Mark Twain</div>
-                        </div>
-                      </li> */}
-                    </ol>
-                  </div>
-                </div>
+                ) : (
+                    <div>
+                      <p>Loading Books</p>
+                    </div>
+                  )}
               </div>
             </div>
-            <div className="open-search">
-              <button onClick={this.props.toSearch}>Add a book</button>
+            <div className="bookshelf">
+              <h2 className="bookshelf-title">Want to Read</h2>
+              <div className="bookshelf-books">
+                {this.state.shelves.wantToRead ? (
+                  <div className="row">
+                    {this.state.shelves.wantToRead
+                      .map(book => (
+                        <Book
+                          id={book.id}
+                          title={book.title}
+                          imageUrl={book.imageLinks.thumbnail}
+                        />
+                      ))}
+                  </div>
+                ) : (
+                    <div>
+                      <p>Loading Books</p>
+                    </div>
+                  )}
+              </div>
+            </div>
+            <div className="bookshelf">
+              <h2 className="bookshelf-title">Read</h2>
+              <div className="bookshelf-books">
+                {this.state.shelves.read ? (
+                  <div className="row">
+                    {this.state.shelves.read
+                      .map(book => (
+                        <Book
+                          id={book.id}
+                          title={book.title}
+                          imageUrl={book.imageLinks.thumbnail}
+                        />
+                      ))}
+                  </div>
+                ) : (
+                    <div>
+                      <p>Loading Books</p>
+                    </div>
+                  )}
+              </div>
             </div>
           </div>
+        </div>
+        <div className="open-search">
+          <button onClick={this.props.toSearch}>Add a book</button>
+        </div>
+      </div>
     )
   }
 }

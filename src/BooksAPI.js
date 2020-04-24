@@ -27,7 +27,7 @@ export const update = (book, shelf) =>
     method: 'PUT',
     headers: {
       ...headers,
-      'Authorization': 'Kyi93',
+      'Authorization': token,
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ shelf })
@@ -37,7 +37,7 @@ export const search = (query) =>
   fetch(`${api}/search`, {
     method: 'POST',
     headers: {
-      'Authorization': 'Kyi94',
+      'Authorization': token,
       ...headers,
       'Content-Type': 'application/json'
     },
