@@ -76,6 +76,7 @@ export default class SearchPage extends Component {
           <div className="row">
             {this.state.bookList.map(book => (
               <Book
+                key={book.id}
                 id={book.id}
                 title={book.title}
                 imageUrl={book.imageLinks.thumbnail}

@@ -67,6 +67,9 @@ export default class Book extends Component {
       imageUrl: this.state.imageUrl,
     }
     BooksAPI.update(book, shelf)
+    .then(() => {
+      this.props.fetchList();
+    })
     
   }
 

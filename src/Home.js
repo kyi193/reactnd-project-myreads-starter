@@ -22,18 +22,8 @@ export default class Home extends Component {
     this.fetchList();
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   console.log("Homepage Updated")
-  //   if (prevState.bookList.length !== 0) {
-  //     console.log("boop")
-  //     if (prevState.bookList[0].id !== this.state.bookList[0].id) {
-  //       this.fetchList();
-  //     }
-  //   }
-  // }
-
   fetchList() {
-    const [ currentlyReading, wantToRead, read ] = [[],[],[]];
+    const [currentlyReading, wantToRead, read] = [[], [], []];
     BooksAPI.getAll()
       .then(books => {
         for (let i = 0; i < books.length; i++) {
@@ -53,7 +43,7 @@ export default class Home extends Component {
           }
         })
       })
-      
+
   }
 
 
@@ -73,9 +63,11 @@ export default class Home extends Component {
                     {this.state.shelves.currentlyReading
                       .map(book => (
                         <Book
+                          key={book.id}
                           id={book.id}
                           title={book.title}
                           imageUrl={book.imageLinks.thumbnail}
+                          fetchList={this.fetchList.bind(this)}
                         />
                       ))}
                   </div>
@@ -94,9 +86,11 @@ export default class Home extends Component {
                     {this.state.shelves.wantToRead
                       .map(book => (
                         <Book
+                          key={book.id}
                           id={book.id}
                           title={book.title}
                           imageUrl={book.imageLinks.thumbnail}
+                          fetchList={this.fetchList.bind(this)}
                         />
                       ))}
                   </div>
@@ -115,9 +109,11 @@ export default class Home extends Component {
                     {this.state.shelves.read
                       .map(book => (
                         <Book
+                          key={book.id}
                           id={book.id}
                           title={book.title}
                           imageUrl={book.imageLinks.thumbnail}
+                          fetchList={this.fetchList.bind(this)}
                         />
                       ))}
                   </div>
