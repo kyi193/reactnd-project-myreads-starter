@@ -33,7 +33,7 @@ export default class Home extends Component {
     const unusedShelf = this.state.shelves[unusedShelfName];
     book.shelf = toShelfName;
     this.setState({
-      shelves:{
+      shelves: {
         [fromShelfName]: filteredFromShelf,
         [toShelfName]: [...toShelf, book],
         [unusedShelfName]: unusedShelf,
@@ -83,9 +83,9 @@ export default class Home extends Component {
                     {this.state.shelves.currentlyReading
                       .map(book => (
                         <Book
-                            key={book.id}
-                            book={book}
-                            bookUpdateSuccessCallback={this.transferBook}
+                          key={book.id}
+                          book={book}
+                          bookUpdateSuccessCallback={this.transferBook}
                         />
                       ))}
                   </div>

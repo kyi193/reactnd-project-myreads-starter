@@ -20,7 +20,7 @@ export default class SearchPage extends Component {
     this.updateSearch = this.updateSearch.bind(this);
     this.fetchBooks = this.fetchBooks.bind(this);
     this.removeBook = this.removeBook.bind(this);
- 
+
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -87,7 +87,7 @@ export default class SearchPage extends Component {
               <Book
                 key={book.id}
                 book={book}
-                bookUpdateSuccessCallback = {this.removeBook}
+                bookUpdateSuccessCallback={this.removeBook}
               />
             ))}
           </div>

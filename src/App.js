@@ -24,7 +24,7 @@ class BooksApp extends Component {
     this.setState({
       showSearchPage: false
     })
-  } 
+  }
 
   toSearch() {
     this.setState({
@@ -38,10 +38,10 @@ class BooksApp extends Component {
     return (
       <div className="app">
         {this.state.showSearchPage ? (
-          <SearchPage returnHome={this.returnHome}/> 
+          <SearchPage returnHome={this.returnHome} />
         ) : (
-          <Home toSearch={this.toSearch}/>
-        )}
+            <Home toSearch={this.toSearch} />
+          )}
       </div>
     )
   }
