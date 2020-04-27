@@ -52,7 +52,7 @@ export default class Book extends Component {
 
   componentDidMount() {
     const { id, title, shelf, imageLinks } = this.props.book;
-    const imageUrl = imageLinks.thumbnail
+    const imageUrl = imageLinks !== undefined ? imageLinks.thumbnail : "https://via.placeholder.com/120x150"
 
     this.setState({
       id,
