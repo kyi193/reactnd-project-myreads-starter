@@ -51,7 +51,7 @@ export default class Book extends Component {
   }
 
   componentDidMount() {
-    const { id, title , shelf, imageLinks} = this.props.book;
+    const { id, title, shelf, imageLinks } = this.props.book;
     const imageUrl = imageLinks.thumbnail
 
     this.setState({
@@ -69,10 +69,12 @@ export default class Book extends Component {
       imageUrl: this.state.imageUrl,
     }
     BooksAPI.update(book, shelf)
-    .then(() => {
-      this.props.transferBook(this.props.book, shelf);
-    })
-    
+      .then(() => {
+        if (this.props.bookUpdateSuccessCallback) {
+          this.props.bookUpdateSuccessCallback(this.props.book, shelf);
+        }
+      })
+
   }
 
   handleShelfSelect = e => {

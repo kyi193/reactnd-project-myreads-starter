@@ -19,6 +19,8 @@ export default class SearchPage extends Component {
     }
     this.updateSearch = this.updateSearch.bind(this);
     this.fetchBooks = this.fetchBooks.bind(this);
+    this.removeBook = this.removeBook.bind(this);
+ 
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -49,6 +51,13 @@ export default class SearchPage extends Component {
     }
   }
 
+  removeBook(book) {
+    const filteredBookList = this.state.bookList.filter(books => books.id !== book.id)
+    this.setState({
+      bookList: filteredBookList
+    })
+  }
+
 
   render() {
 
@@ -77,9 +86,8 @@ export default class SearchPage extends Component {
             {this.state.bookList.map(book => (
               <Book
                 key={book.id}
-                id={book.id}
-                title={book.title}
-                imageUrl={book.imageLinks.thumbnail}
+                book={book}
+                bookUpdateSuccessCallback = {this.removeBook}
               />
             ))}
           </div>
