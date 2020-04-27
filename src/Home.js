@@ -31,6 +31,7 @@ export default class Home extends Component {
     const unusedShelfName = Object.keys(this.state.shelves)
       .filter(filteredShelf => ![fromShelfName, toShelfName].includes(filteredShelf)).toString();
     const unusedShelf = this.state.shelves[unusedShelfName];
+    book.shelf = toShelfName;
     this.setState({
       shelves:{
         [fromShelfName]: filteredFromShelf,
