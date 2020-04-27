@@ -16,11 +16,18 @@ export default class SearchPage extends Component {
       possibleTerms: allTerms.map((term) => term.toLowerCase()),
       bookList: [],
       suggestedTerms: [],
+      shelvedBooks: {},
     }
     this.updateSearch = this.updateSearch.bind(this);
     this.fetchBooks = this.fetchBooks.bind(this);
     this.removeBook = this.removeBook.bind(this);
+    this.fetchList = this.fetchList.bind(this);
+    this.getShelfForBook = this.getShelfForBook.bind(this);
 
+  }
+
+  componentDidMount() {
+    this.fetchList();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -58,6 +65,27 @@ export default class SearchPage extends Component {
     })
   }
 
+  fetchList() {
+    BooksAPI.getAll()
+      .then(books => {
+        const shelvedBooks = {}
+        for (let i = 0; i < books.length; i++) {
+          shelvedBooks[books[i].id] = books[i]
+        }
+        this.setState({
+          shelvedBooks
+        })
+      })
+
+  }
+
+  getShelfForBook(searchedBook) {
+    const shelvedBook = this.state.shelvedBooks[searchedBook.id]
+    if (!shelvedBook) {
+      return "none"
+    }
+    return shelvedBook.shelf
+  }
 
   render() {
 
@@ -88,6 +116,7 @@ export default class SearchPage extends Component {
                 key={book.id}
                 book={book}
                 bookUpdateSuccessCallback={this.removeBook}
+                selectedShelf={this.getShelfForBook(book)}
               />
             ))}
           </div>

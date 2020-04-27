@@ -8,10 +8,10 @@ import styled from "styled-components";
 import spinner from "./spinner.gif"
 
 const shelves = [
-  { id: 1, shelf: "None" },
-  { id: 2, shelf: "Currently Reading" },
-  { id: 3, shelf: "Want to Read" },
-  { id: 4, shelf: "Read" }
+  { id: 1, prettyShelf: "None", shelf: "none" },
+  { id: 2, prettyShelf: "Currently Reading", shelf: "currentlyReading" },
+  { id: 3, prettyShelf: "Want to Read", shelf: "wantToRead" },
+  { id: 4, prettyShelf: "Read", shelf: "read" }
 ];
 
 
@@ -78,15 +78,15 @@ export default class Book extends Component {
   }
 
   handleShelfSelect = e => {
-    if (e.target.value !== "None") {
+    if (e.target.value !== "none") {
       e.persist();
-      if (e.target.value === "Currently Reading") {
+      if (e.target.value === "currentlyReading") {
         this.updateList("currentlyReading")
       }
-      else if (e.target.value === "Want to Read") {
+      else if (e.target.value === "wantToRead") {
         this.updateList("wantToRead")
       }
-      else if (e.target.value === "Read") {
+      else if (e.target.value === "read") {
         this.updateList("read")
       }
     }
@@ -105,8 +105,8 @@ export default class Book extends Component {
             <select id="genres" className="dropdown" onChange={this.handleShelfSelect}>
               <option disabled>Select an Option...</option>
               {shelves.map(item => (
-                <option key={item.id} className="dropdown__option" value={item.shelf}>
-                  {item.shelf}
+                <option key={item.id} className="dropdown__option" value={item.shelf} selected={this.props.selectedShelf === item.shelf}>
+                  {item.prettyShelf}
                 </option>
               ))}
             </select>
