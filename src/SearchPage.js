@@ -81,7 +81,7 @@ export default class SearchPage extends Component {
             </div>
           </div>
         </div>
-        {this.state.bookList ? (
+        {this.state.bookList && this.state.searchTerm ? (
           <div className="row">
             {this.state.bookList.map(book => (
               <Book
