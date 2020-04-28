@@ -74,6 +74,7 @@ export default class Book extends Component {
             src={this.state.imageUrl}
             style={{ width: '12em', height: '15em' }}
             className="card-img-top rounded mx-auto d-block mt-2"
+            alt="book cover"
           />
           <div className="book-shelf-changer">
             <select id="genres" className="dropdown" onChange={this.handleShelfSelect}>
