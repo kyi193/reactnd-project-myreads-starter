@@ -105,9 +105,7 @@ export default class SearchPage extends Component {
         <div className="search-books">
           <div className="search-books-bar">
             <Link to="/">
-              <button
-                className="close-search"
-                onClick={this.props.returnHome}>
+              <button className="close-search">
                 Close
               </button>
             </Link>

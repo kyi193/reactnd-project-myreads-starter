@@ -96,7 +96,7 @@ export default class Home extends Component {
         </div>
         <div className="open-search">
           <Link to="/search">
-            <button onClick={this.props.toSearch}>Add a book</button>
+            <button>Add a book</button>
           </Link>
         </div>
       </div>
