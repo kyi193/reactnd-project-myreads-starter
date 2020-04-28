@@ -58,11 +58,19 @@ export default class SearchPage extends Component {
     }
   }
 
-  removeBook(book) {
-    this.fetchList();
+  removeBook(book, toShelf) {
+
+    const newShelvedBooks = Object.assign({}, this.state.shelvedBooks)
+    if (!newShelvedBooks[book.id]) {
+      book.shelf = toShelf;
+      newShelvedBooks[book.id] = book
+    } else {
+      newShelvedBooks[book.id].shelf = toShelf;
+    }
     const filteredBookList = this.state.bookList.filter(books => books.id !== book.id)
     this.setState({
       bookList: filteredBookList,
+      shelvedBooks: newShelvedBooks
     })
 
   }
