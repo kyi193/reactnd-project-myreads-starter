@@ -86,6 +86,7 @@ export default class Home extends Component {
                           key={book.id}
                           book={book}
                           bookUpdateSuccessCallback={this.transferBook}
+                          selectedShelf={book.shelf}
                         />
                       ))}
                   </div>
@@ -107,6 +108,7 @@ export default class Home extends Component {
                           key={book.id}
                           book={book}
                           bookUpdateSuccessCallback={this.transferBook}
+                          selectedShelf={book.shelf}
                         />
                       ))}
                   </div>
@@ -128,6 +130,7 @@ export default class Home extends Component {
                           key={book.id}
                           book={book}
                           bookUpdateSuccessCallback={this.transferBook}
+                          selectedShelf={book.shelf}
                         />
                       ))}
                   </div>
