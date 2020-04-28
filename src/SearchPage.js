@@ -1,14 +1,12 @@
-import React, { Component } from 'react'
-import * as BooksAPI from './BooksAPI'
-import Book from "./Book"
-import "bootstrap/dist//css/bootstrap.min.css";
+import React, { Component } from 'react';
+import * as BooksAPI from './BooksAPI';
+import Book from './Book'
+import 'bootstrap/dist//css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-let allTerms = ['Android', 'Art', 'Artificial Intelligence', 'Astronomy', 'Austen', 'Baseball', 'Basketball', 'Bhagat', 'Biography', 'Brief', 'Business', 'Camus', 'Cervantes', 'Christie', 'Classics', 'Comics', 'Cook', 'Cricket', 'Cycling', 'Desai', 'Design', 'Development', 'Digital Marketing', 'Drama', 'Drawing', 'Dumas', 'Education', 'Everything', 'Fantasy', 'Film', 'Finance', 'First', 'Fitness', 'Football', 'Future', 'Games', 'Gandhi', 'Homer', 'Horror', 'Hugo', 'Ibsen', 'Journey', 'Kafka', 'King', 'Lahiri', 'Larsson', 'Learn', 'Literary Fiction', 'Make', 'Manage', 'Marquez', 'Money', 'Mystery', 'Negotiate', 'Painting', 'Philosophy', 'Photography', 'Poetry', 'Production', 'Programming', 'React', 'Redux', 'River', 'Robotics', 'Rowling', 'Satire', 'Science Fiction', 'Shakespeare', 'Singh', 'Swimming', 'Tale', 'Thrun', 'Time', 'Tolstoy', 'Travel', 'Ultimate', 'Virtual Reality', 'Web Development', 'iOS'
-]
 
 export default class SearchPage extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       searchTerm: "",
@@ -36,7 +34,6 @@ export default class SearchPage extends Component {
     }
   }
 
-
   updateSearch(event) {
     let term = event.target.value.toLowerCase();
     this.setState({
@@ -50,25 +47,24 @@ export default class SearchPage extends Component {
         .then(data => {
           this.setState({
             bookList: (data.error === undefined ? data : [])
-          })
+          });
         })
     }
   }
 
   removeBook(book, toShelf) {
-
-    const newShelvedBooks = Object.assign({}, this.state.shelvedBooks)
+    const newShelvedBooks = Object.assign({}, this.state.shelvedBooks);
     if (!newShelvedBooks[book.id]) {
       book.shelf = toShelf;
-      newShelvedBooks[book.id] = book
+      newShelvedBooks[book.id] = book;
     } else {
       newShelvedBooks[book.id].shelf = toShelf;
     }
-    const filteredBookList = this.state.bookList.filter(books => books.id !== book.id)
+    const filteredBookList = this.state.bookList.filter(books => books.id !== book.id);
     this.setState({
       bookList: filteredBookList,
       shelvedBooks: newShelvedBooks
-    })
+    });
 
   }
 
@@ -81,21 +77,20 @@ export default class SearchPage extends Component {
         }
         this.setState({
           shelvedBooks
-        })
+        });
       })
 
   }
 
   getShelfForBook(searchedBook) {
-    const shelvedBook = this.state.shelvedBooks[searchedBook.id]
+    const shelvedBook = this.state.shelvedBooks[searchedBook.id];
     if (!shelvedBook) {
-      return "none"
+      return "none";
     }
-    return shelvedBook.shelf
+    return shelvedBook.shelf;
   }
 
   render() {
-
     return (
       <React.Fragment>
         <div className="search-books">

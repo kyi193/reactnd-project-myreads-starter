@@ -26,7 +26,7 @@ export default class Book extends Component {
 
   componentDidMount() {
     const { id, title, shelf, imageLinks } = this.props.book;
-    const imageUrl = imageLinks !== undefined ? imageLinks.thumbnail : "https://via.placeholder.com/120x150"
+    const imageUrl = imageLinks !== undefined ? imageLinks.thumbnail : "https://via.placeholder.com/120x150";
 
     this.setState({
       id,
@@ -55,13 +55,13 @@ export default class Book extends Component {
     if (e.target.value !== "none") {
       e.persist();
       if (e.target.value === "currentlyReading") {
-        this.updateList("currentlyReading")
+        this.updateList("currentlyReading");
       }
       else if (e.target.value === "wantToRead") {
-        this.updateList("wantToRead")
+        this.updateList("wantToRead");
       }
       else if (e.target.value === "read") {
-        this.updateList("read")
+        this.updateList("read");
       }
     }
   };

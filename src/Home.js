@@ -1,12 +1,11 @@
-import React, { Component } from 'react'
-import * as BooksAPI from './BooksAPI'
-import Bookshelf from "./Bookshelf"
+import React, { Component } from 'react';
+import * as BooksAPI from './BooksAPI';
+import Bookshelf from './Bookshelf';
 import { Link } from 'react-router-dom';
-
 
 export default class Home extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       shelves: {
@@ -14,10 +13,10 @@ export default class Home extends Component {
         wantToRead: [],
         read: [],
       },
-    }
+    };
 
-    this.fetchList = this.fetchList.bind(this)
-    this.transferBook = this.transferBook.bind(this)
+    this.fetchList = this.fetchList.bind(this);
+    this.transferBook = this.transferBook.bind(this);
   }
 
   componentDidMount() {
@@ -28,7 +27,7 @@ export default class Home extends Component {
     const fromShelfName = book.shelf;
     const fromShelf = this.state.shelves[fromShelfName];
     const toShelf = this.state.shelves[toShelfName];
-    const filteredFromShelf = fromShelf.filter(filteredBook => filteredBook.title !== book.title)
+    const filteredFromShelf = fromShelf.filter(filteredBook => filteredBook.title !== book.title);
     const unusedShelfName = Object.keys(this.state.shelves)
       .filter(filteredShelf => ![fromShelfName, toShelfName].includes(filteredShelf)).toString();
     const unusedShelf = this.state.shelves[unusedShelfName];
@@ -41,7 +40,6 @@ export default class Home extends Component {
       }
     })
   }
-
 
   fetchList() {
     const [currentlyReading, wantToRead, read] = [[], [], []];
@@ -62,11 +60,10 @@ export default class Home extends Component {
             wantToRead,
             read
           }
-        })
+        });
       })
 
   }
-
 
   render() {
     return (

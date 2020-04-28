@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import './App.css'
-import SearchPage from './SearchPage'
-import Home from './Home'
-
-//refactor functions to ES6 syntax
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import './App.css';
+import SearchPage from './SearchPage';
+import Home from './Home';
 
 class BooksApp extends Component {
   constructor(props) {
@@ -30,8 +28,6 @@ class BooksApp extends Component {
       showSearchPage: true
     })
   }
-
-
 
   render() {
     return (
