@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import * as BooksAPI from './BooksAPI'
 import Book from "./Book"
+import Bookshelf from "./Bookshelf"
 
 
 export default class Home extends Component {
@@ -75,72 +76,21 @@ export default class Home extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <div className="bookshelf">
-              <h2 className="bookshelf-title">Currently Reading</h2>
-              <div className="bookshelf-books">
-                {this.state.shelves.currentlyReading ? (
-                  <div className="row">
-                    {this.state.shelves.currentlyReading
-                      .map(book => (
-                        <Book
-                          key={book.id}
-                          book={book}
-                          bookUpdateSuccessCallback={this.transferBook}
-                          selectedShelf={book.shelf}
-                        />
-                      ))}
-                  </div>
-                ) : (
-                    <div>
-                      <p>Loading Books</p>
-                    </div>
-                  )}
-              </div>
-            </div>
-            <div className="bookshelf">
-              <h2 className="bookshelf-title">Want to Read</h2>
-              <div className="bookshelf-books">
-                {this.state.shelves.wantToRead ? (
-                  <div className="row">
-                    {this.state.shelves.wantToRead
-                      .map(book => (
-                        <Book
-                          key={book.id}
-                          book={book}
-                          bookUpdateSuccessCallback={this.transferBook}
-                          selectedShelf={book.shelf}
-                        />
-                      ))}
-                  </div>
-                ) : (
-                    <div>
-                      <p>Loading Books</p>
-                    </div>
-                  )}
-              </div>
-            </div>
-            <div className="bookshelf">
-              <h2 className="bookshelf-title">Read</h2>
-              <div className="bookshelf-books">
-                {this.state.shelves.read ? (
-                  <div className="row">
-                    {this.state.shelves.read
-                      .map(book => (
-                        <Book
-                          key={book.id}
-                          book={book}
-                          bookUpdateSuccessCallback={this.transferBook}
-                          selectedShelf={book.shelf}
-                        />
-                      ))}
-                  </div>
-                ) : (
-                    <div>
-                      <p>Loading Books</p>
-                    </div>
-                  )}
-              </div>
-            </div>
+            <Bookshelf
+              shelfName="Currently Reading"
+              shelf={this.state.shelves.currentlyReading}
+              bookUpdateSuccessCallback={this.transferBook}
+            />
+            <Bookshelf
+              shelfName="Want To Read"
+              shelf={this.state.shelves.wantToRead}
+              bookUpdateSuccessCallback={this.transferBook}
+            />
+            <Bookshelf
+              shelfName="Read"
+              shelf={this.state.shelves.read}
+              bookUpdateSuccessCallback={this.transferBook}
+            />
           </div>
         </div>
         <div className="open-search">
