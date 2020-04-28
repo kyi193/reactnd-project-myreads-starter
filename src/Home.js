@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import * as BooksAPI from './BooksAPI'
 import Book from "./Book"
 import Bookshelf from "./Bookshelf"
+import { Link } from 'react-router-dom';
 
 
 export default class Home extends Component {
@@ -94,7 +95,9 @@ export default class Home extends Component {
           </div>
         </div>
         <div className="open-search">
-          <button onClick={this.props.toSearch}>Add a book</button>
+          <Link to="/search">
+            <button onClick={this.props.toSearch}>Add a book</button>
+          </Link>
         </div>
       </div>
     )

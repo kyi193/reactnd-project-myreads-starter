@@ -37,11 +37,10 @@ class BooksApp extends Component {
   render() {
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
-          <SearchPage returnHome={this.returnHome} />
-        ) : (
-            <Home toSearch={this.toSearch} />
-          )}
+        <Router>
+          <Route exact path="/" component={Home} />
+          <Route path="/search" component={SearchPage} />
+        </Router>
       </div>
     )
   }

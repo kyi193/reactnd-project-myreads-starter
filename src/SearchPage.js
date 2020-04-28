@@ -3,6 +3,7 @@ import * as BooksAPI from './BooksAPI'
 import Book from "./Book"
 import { Typeahead } from "react-bootstrap-typeahead";
 import "bootstrap/dist//css/bootstrap.min.css";
+import { Link } from 'react-router-dom';
 let allTerms = ['Android', 'Art', 'Artificial Intelligence', 'Astronomy', 'Austen', 'Baseball', 'Basketball', 'Bhagat', 'Biography', 'Brief', 'Business', 'Camus', 'Cervantes', 'Christie', 'Classics', 'Comics', 'Cook', 'Cricket', 'Cycling', 'Desai', 'Design', 'Development', 'Digital Marketing', 'Drama', 'Drawing', 'Dumas', 'Education', 'Everything', 'Fantasy', 'Film', 'Finance', 'First', 'Fitness', 'Football', 'Future', 'Games', 'Gandhi', 'Homer', 'Horror', 'Hugo', 'Ibsen', 'Journey', 'Kafka', 'King', 'Lahiri', 'Larsson', 'Learn', 'Literary Fiction', 'Make', 'Manage', 'Marquez', 'Money', 'Mystery', 'Negotiate', 'Painting', 'Philosophy', 'Photography', 'Poetry', 'Production', 'Programming', 'React', 'Redux', 'River', 'Robotics', 'Rowling', 'Satire', 'Science Fiction', 'Shakespeare', 'Singh', 'Swimming', 'Tale', 'Thrun', 'Time', 'Tolstoy', 'Travel', 'Ultimate', 'Virtual Reality', 'Web Development', 'iOS'
 ]
 let allTermsLower = allTerms.map((term) => term.toLowerCase());
@@ -103,11 +104,13 @@ export default class SearchPage extends Component {
       <React.Fragment>
         <div className="search-books">
           <div className="search-books-bar">
-            <button
-              className="close-search"
-              onClick={this.props.returnHome}>
-              Close
+            <Link to="/">
+              <button
+                className="close-search"
+                onClick={this.props.returnHome}>
+                Close
               </button>
+            </Link>
             <div className="search-books-input-wrapper">
               <input
                 type='text'
