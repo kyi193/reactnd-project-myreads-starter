@@ -59,10 +59,12 @@ export default class SearchPage extends Component {
   }
 
   removeBook(book) {
+    this.fetchList();
     const filteredBookList = this.state.bookList.filter(books => books.id !== book.id)
     this.setState({
-      bookList: filteredBookList
+      bookList: filteredBookList,
     })
+
   }
 
   fetchList() {
